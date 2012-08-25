@@ -1,0 +1,8 @@
+/bin
+
+This is where the class files will be stored after compiling the Java package.
+
+
+/bin/<package>/res
+
+This is where the package specific resources will be stored.

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class craft {
-	private String craft = "craft.png";
+	private String craft = "res/imgs/craft.png";
 
 	private int dx;
 	private int dy;

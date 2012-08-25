@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 public class alien {
-	private String craftImage = "enemy.png";
+	private String craftImage = "res/imgs/enemy.png";
 
 	private int x;
 	private int y;

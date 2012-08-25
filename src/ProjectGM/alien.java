@@ -10,6 +10,7 @@ public class alien {
 
 	private int x;
 	private int y;
+	private int health;
 	private int distance;
 	private int craftX;
 	private int craftY;
@@ -28,6 +29,7 @@ public class alien {
 		this.y = y;
 		this.craftX = craftX;
 		this.craftY = craftY;
+		this.health = 5;
 	}
 	public void move() {
 	}
@@ -74,6 +76,12 @@ public class alien {
 	}
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	public void setHealth(int damage) {
+		this.health += damage;
+	}
+	public int getHealth() {
+		return health;
 	}
 	public Image getImage() {
 		return image;

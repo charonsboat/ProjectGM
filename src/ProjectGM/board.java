@@ -179,7 +179,10 @@ public class board extends JPanel implements Runnable {
 
 				if (r1.intersects(r2)) {
 					m.setVisible(false);
-					a.setVisible(false);
+					a.setHealth(-1);
+					if (a.getHealth()<=0) {
+						a.setVisible(false);
+					}
 				}
 			}
 		}

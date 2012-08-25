@@ -19,12 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class board extends JPanel implements Runnable {
+	private double timeOver;
 	private Thread thread;
 	public craft craft;
 	private ArrayList aliens;
 	private boolean ingame;
 	private int B_WIDTH;
 	private int B_HEIGHT;
+	private double FPS;
 	private final int DELAY = 20;
 
 	private int[][] pos = {
@@ -43,6 +45,9 @@ public class board extends JPanel implements Runnable {
 		craft = new craft();
 
 		initAliens();
+	}
+	private void displayFPS() {
+		FPS = Math.round(1000/ ((int) DELAY + timeOver));
 	}
 	public void addNotify() {
 		super.addNotify();
@@ -77,12 +82,18 @@ public class board extends JPanel implements Runnable {
 			for (int i=0;i<aliens.size();++i) {
 				alien a = (alien) aliens.get(i);
 				if (a.isVisible()) {
-					g2d.drawImage(a.getImage(), a.getX(craft.getX(), craft.getY()), a.getY(craft.getY(), craft.getX()), this);
+					int a_xx = a.getX(craft.getX(), craft.getY());
+					int a_yy = a.getY(craft.getY(), craft.getX());
+					g2d.drawImage(a.getImage(), a_xx, a_yy, this);
+					g2d.setColor(Color.WHITE);
+					g2d.drawString(String.valueOf(a.getHealth()), a_xx, a_yy-2);
 				}
 			}
 
 			g2d.setColor(Color.WHITE);
 			g2d.drawString("Aliens Left: "+aliens.size(), 5, 15);
+			displayFPS();
+			g2d.drawString("FPS: "+String.valueOf(FPS), 200, 15);
 		}
 		else {
 			String msg = "Game Over";
@@ -139,13 +150,16 @@ public class board extends JPanel implements Runnable {
 
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			sleep = DELAY - timeDiff;
+			this.timeOver = (-1) * sleep;
 
 			if (sleep<0) {
-				sleep = 2;
+				sleep = 0;
 			}
+
 			try {
 				Thread.sleep(sleep);
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 				System.out.println("interrupted");
 			}
 

@@ -29,7 +29,7 @@ public class Enemy {
 		this.y = y;
 		this.PlayerX = PlayerX;
 		this.PlayerY = PlayerY;
-		this.health = 5;
+		this.health = 2;
 	}
 	public void move() {
 	}

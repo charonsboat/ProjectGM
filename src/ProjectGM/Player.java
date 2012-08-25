@@ -86,16 +86,16 @@ public class Player {
 			fire("RIGHT");
 		}
 		if (key==KeyEvent.VK_A) {
-			dx = -3;
+			dx = -2;
 		}
 		if (key==KeyEvent.VK_D) {
-			dx = 3;
+			dx = 2;
 		}
 		if (key==KeyEvent.VK_W) {
-			dy = -3;
+			dy = -2;
 		}
 		if (key==KeyEvent.VK_S) {
-			dy = 3;
+			dy = 2;
 		}
 	}
 	public void fire(String direction) {

@@ -27,10 +27,10 @@ public class board extends JPanel implements Runnable {
 	private int B_WIDTH;
 	private int B_HEIGHT;
 	private double FPS;
-	private final int DELAY = 20;
+	private final int DELAY = 10;
 
 	private int[][] pos = {
-		{250, 200}, {300, 40}, {300, 200}
+		{250, 200}, {300, 40}, {300, 200}, {150, 10}
 	};
 
 	public board() {
@@ -47,7 +47,7 @@ public class board extends JPanel implements Runnable {
 		initEnemies();
 	}
 	private void displayFPS() {
-		FPS = Math.round(1000/ ((int) DELAY + timeOver));
+		FPS = (int) Math.round(1000/ ((double) (timeOver)));
 	}
 	public void addNotify() {
 		super.addNotify();
@@ -136,11 +136,12 @@ public class board extends JPanel implements Runnable {
 			for (int i=0; i<Enemies.size(); ++i) {
 				Enemy a = (Enemy) Enemies.get(i);
 				if (a.isVisible()) {
-					try {
+					// THIS CODE WILL CAUSE FPS TO CALCULATE INCORRECTLY //
+					/*try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						System.out.println("interrupted");
-					}
+					}*/
 					a.move();
 				}
 				else {
@@ -150,10 +151,13 @@ public class board extends JPanel implements Runnable {
 
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			sleep = DELAY - timeDiff;
-			this.timeOver = (-1) * sleep;
 
 			if (sleep<0) {
+				this.timeOver = (-1) * (int) sleep;
 				sleep = 0;
+			}
+			else {
+				this.timeOver = (int) sleep;
 			}
 
 			try {

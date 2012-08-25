@@ -38,7 +38,7 @@ public class alien {
 		tempY = craftY-y;
 		craftX = craft_X;
 
-		distance = (int) Math.sqrt(Math.pow(tempX,2)+Math.pow(tempY,2));
+		distance = formulas.getDistance(x, y, craftX, craftY);
 		if (distance<100) {
 			if (craftX>x) {
 				x += 1;
@@ -57,7 +57,7 @@ public class alien {
 		tempY = craftY-y;
 		craftY = craft_Y;
 
-		distance = (int) Math.sqrt(((tempX*tempX)+(tempY*tempY)));
+		distance = formulas.getDistance(x, y, craftX, craftY);
 		if (distance<100) {
 			if (craftY>y) {
 				y += 1;

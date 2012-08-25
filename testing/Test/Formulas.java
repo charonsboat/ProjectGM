@@ -1,8 +1,8 @@
-package ProjectGM;
+package Test;
 
 
-public class formulas {
-	private formulas() {
+public class Formulas {
+	private Formulas() {
 		throw new AssertionError();
 	}
 	public static int getDistance(int x1, int y1, int x2, int y2) {

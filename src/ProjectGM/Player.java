@@ -32,15 +32,21 @@ public class Player {
 		x = 40;
 		y = 60;
 	}
-	public void move() {
+	public void move(int B_WIDTH, int B_HEIGHT) {
 		x += dx;
 		y += dy;
 
 		if (x<1) {
 			x = 1;
 		}
+		if (x>B_WIDTH-width) {
+			x = B_WIDTH-width;
+		}
 		if (y<1) {
 			y = 1;
+		}
+		if (y>B_HEIGHT-height) {
+			y = B_HEIGHT-height;
 		}
 	}
 	public int getX() {

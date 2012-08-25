@@ -114,7 +114,7 @@ public class board extends JPanel implements Runnable {
 		beforeTime = System.currentTimeMillis();
 
 		while (true) {
-			Player.move();
+			Player.move(B_WIDTH, B_HEIGHT);
 			checkCollisions();
 			repaint();
 

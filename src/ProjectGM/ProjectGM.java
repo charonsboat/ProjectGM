@@ -10,7 +10,7 @@ public class ProjectGM extends JFrame {
 		setSize(400, 300);
 		setLocationRelativeTo(null);
 		setTitle("TwinStick Shooter");
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 	}
 	public static void main(String[] args) {

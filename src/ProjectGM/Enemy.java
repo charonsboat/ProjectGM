@@ -40,7 +40,7 @@ public class Enemy {
 		tempY = PlayerY-y;
 		PlayerX = Player_X;
 
-		distance = formulas.getDistance(x, y, PlayerX, PlayerY);
+		distance = GM_Utilities.getDistance(x, y, PlayerX, PlayerY);
 		if (distance<100) {
 			if (PlayerX>x) {
 				x += 1;
@@ -59,7 +59,7 @@ public class Enemy {
 		tempY = PlayerY-y;
 		PlayerY = Player_Y;
 
-		distance = formulas.getDistance(x, y, PlayerX, PlayerY);
+		distance = GM_Utilities.getDistance(x, y, PlayerX, PlayerY);
 		if (distance<100) {
 			if (PlayerY>y) {
 				y += 1;

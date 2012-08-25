@@ -5,66 +5,66 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-public class alien {
-	private String craftImage = "res/imgs/enemy.png";
+public class Enemy {
+	private String PlayerImage = "res/imgs/Enemy.png";
 
 	private int x;
 	private int y;
 	private int health;
 	private int distance;
-	private int craftX;
-	private int craftY;
+	private int PlayerX;
+	private int PlayerY;
 	private int width;
 	private int height;
 	private boolean visible;
 	private Image image;
 
-	public alien(int x, int y) {
-		ImageIcon ii = new ImageIcon(this.getClass().getResource(craftImage));
+	public Enemy(int x, int y) {
+		ImageIcon ii = new ImageIcon(this.getClass().getResource(PlayerImage));
 		image = ii.getImage();
 		width = image.getWidth(null);
 		height = image.getHeight(null);
 		visible = true;
 		this.x = x;
 		this.y = y;
-		this.craftX = craftX;
-		this.craftY = craftY;
+		this.PlayerX = PlayerX;
+		this.PlayerY = PlayerY;
 		this.health = 5;
 	}
 	public void move() {
 	}
-	public int getX(int craft_X, int craft_Y) {
+	public int getX(int Player_X, int Player_Y) {
 		int tempX;
 		int tempY;
-		tempX = craftX-x;
-		tempY = craftY-y;
-		craftX = craft_X;
+		tempX = PlayerX-x;
+		tempY = PlayerY-y;
+		PlayerX = Player_X;
 
-		distance = formulas.getDistance(x, y, craftX, craftY);
+		distance = formulas.getDistance(x, y, PlayerX, PlayerY);
 		if (distance<100) {
-			if (craftX>x) {
+			if (PlayerX>x) {
 				x += 1;
 			}
-			if (craftX<x) {
+			if (PlayerX<x) {
 				x -= 1;
 			}
 		}
 
 		return x;
 	}
-	public int getY(int craft_Y, int craft_X) {
+	public int getY(int Player_Y, int Player_X) {
 		int tempX;
 		int tempY;
-		tempX = craftX-x;
-		tempY = craftY-y;
-		craftY = craft_Y;
+		tempX = PlayerX-x;
+		tempY = PlayerY-y;
+		PlayerY = Player_Y;
 
-		distance = formulas.getDistance(x, y, craftX, craftY);
+		distance = formulas.getDistance(x, y, PlayerX, PlayerY);
 		if (distance<100) {
-			if (craftY>y) {
+			if (PlayerY>y) {
 				y += 1;
 			}
-			if (craftY<y) {
+			if (PlayerY<y) {
 				y -= 1;
 			}	
 		}

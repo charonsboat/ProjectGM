@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class craft {
-	private String craft = "res/imgs/craft.png";
+public class Player {
+	private String Player = "res/imgs/Player.png";
 
 	private int dx;
 	private int dy;
@@ -22,8 +22,8 @@ public class craft {
 	private ArrayList missiles;
 	private String direction;
 
-	public craft() {
-		ImageIcon ii = new ImageIcon(this.getClass().getResource(craft));
+	public Player() {
+		ImageIcon ii = new ImageIcon(this.getClass().getResource(Player));
 		image = ii.getImage();
 		width = image.getWidth(null);
 		height = image.getHeight(null);

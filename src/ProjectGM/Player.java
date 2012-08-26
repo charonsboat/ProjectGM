@@ -18,6 +18,7 @@ public class Player {
 	private int width;
 	private int height;
 	private boolean visible;
+	private boolean stats = false;
 	private Image image;
 	private ArrayList missiles;
 	private String direction;
@@ -31,6 +32,14 @@ public class Player {
 		visible = true;
 		x = 40;
 		y = 60;
+	}
+	private void toggleStats() {
+		if (stats) {
+			stats = false;
+		}
+		else {
+			stats = true;
+		}
 	}
 	public void move(int B_WIDTH, int B_HEIGHT) {
 		x += dx;
@@ -67,12 +76,18 @@ public class Player {
 	public boolean isVisible() {
 		return visible;
 	}
+	public boolean stats() {
+		return stats;
+	}
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, width, height);
 	}
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 
+		if (key==KeyEvent.VK_F3) {
+			toggleStats();
+		}
 		if (key==KeyEvent.VK_UP) {
 			fire("UP");
 		}

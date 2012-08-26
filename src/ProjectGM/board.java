@@ -27,7 +27,7 @@ public class board extends JPanel implements Runnable {
 	private int B_WIDTH;
 	private int B_HEIGHT;
 	private double FPS;
-	private final int DELAY = 10;
+	private final int DELAY = 20;
 
 	private int[][] pos = {
 		{250, 200}, {300, 40}, {300, 200}, {150, 10}
@@ -85,15 +85,19 @@ public class board extends JPanel implements Runnable {
 					int a_xx = a.getX(Player.getX(), Player.getY());
 					int a_yy = a.getY(Player.getY(), Player.getX());
 					g2d.drawImage(a.getImage(), a_xx, a_yy, this);
-					g2d.setColor(Color.WHITE);
-					g2d.drawString(String.valueOf(a.getHealth()), a_xx, a_yy-2);
+					if (Player.stats()) {
+						g2d.setColor(Color.WHITE);
+						g2d.drawString(String.valueOf(a.getHealth()), a_xx, a_yy-2);
+					}
 				}
 			}
 
-			g2d.setColor(Color.WHITE);
-			g2d.drawString("Enemies Left: "+Enemies.size(), 5, 15);
-			displayFPS();
-			g2d.drawString("FPS: "+String.valueOf(FPS), 200, 15);
+			if (Player.stats()) {
+				g2d.setColor(Color.WHITE);
+				g2d.drawString("Enemies Left: "+Enemies.size(), 5, 15);
+				displayFPS();
+				g2d.drawString("FPS: "+String.valueOf(FPS), 200, 15);
+			}
 		}
 		else {
 			String msg = "Game Over";

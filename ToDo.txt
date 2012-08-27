@@ -1,0 +1,7 @@
+ProjectGM ToDo List:
+====================
+
+-Tile-to-Entity Collision Detection with all other entities
+-Grid Layout with Tile Objects
+-Toggleable gridlines, and Entity Box Lines with Debug Stats
+-Level Editor (Long Term)

@@ -17,6 +17,7 @@ public class Player {
 	private int y;
 	private int width;
 	private int height;
+	private static final int PLAYER_SPEED = 2;
 	private boolean visible;
 	private boolean stats = false;
 	private Image image;
@@ -32,6 +33,11 @@ public class Player {
 		visible = true;
 		x = 40;
 		y = 60;
+	}
+	public static int speed() {
+		int speed = PLAYER_SPEED;
+
+		return speed;
 	}
 	private void toggleStats() {
 		if (stats) {
@@ -56,6 +62,21 @@ public class Player {
 		}
 		if (y>B_HEIGHT-height) {
 			y = B_HEIGHT-height;
+		}
+	}
+	public void setMove(String move_direction) {
+		switch (move_direction) {
+			case "UP":
+				y -= PLAYER_SPEED;
+				break;
+			case "RIGHT":
+				x += PLAYER_SPEED;
+				break;
+			case "DOWN":
+				y += PLAYER_SPEED;
+				break;
+			case "LEFT":
+				x -= PLAYER_SPEED;
 		}
 	}
 	public int getX() {
@@ -101,16 +122,16 @@ public class Player {
 			fire("RIGHT");
 		}
 		if (key==KeyEvent.VK_A) {
-			dx = -2;
+			dx = -PLAYER_SPEED;
 		}
 		if (key==KeyEvent.VK_D) {
-			dx = 2;
+			dx = PLAYER_SPEED;
 		}
 		if (key==KeyEvent.VK_W) {
-			dy = -2;
+			dy = -PLAYER_SPEED;
 		}
 		if (key==KeyEvent.VK_S) {
-			dy = 2;
+			dy = PLAYER_SPEED;
 		}
 	}
 	public void fire(String direction) {

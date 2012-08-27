@@ -22,12 +22,13 @@ public class board extends JPanel implements Runnable {
 	private double timeOver;
 	private Thread thread;
 	public Player Player;
+	private Block Block;
 	private ArrayList Enemies;
 	private boolean ingame;
 	private int B_WIDTH;
 	private int B_HEIGHT;
 	private double FPS;
-	private final int DELAY = 20;
+	private final int DELAY = 10;
 
 	private int[][] pos = {
 		{250, 200}, {300, 40}, {300, 200}, {150, 10}
@@ -43,6 +44,7 @@ public class board extends JPanel implements Runnable {
 		setSize(400, 300);
 
 		Player = new Player();
+		Block = new Block();
 
 		initEnemies();
 	}
@@ -71,6 +73,9 @@ public class board extends JPanel implements Runnable {
 
 			if (Player.isVisible()) {
 				g2d.drawImage(Player.getImage(), Player.getX(), Player.getY(), this);
+			}
+			if (Block.isVisible()) {
+				g2d.drawImage(Block.getImage(), Block.getX(), Block.getY(), this);
 			}
 
 			ArrayList ms = Player.getMissiles();
@@ -181,10 +186,29 @@ public class board extends JPanel implements Runnable {
 			Enemy a = (Enemy) Enemies.get(j);
 			Rectangle r2 = a.getBounds();
 
-			if (r3.intersects(r2)) {
+			if (GM_Utilities.checkCollision(r3, r2)) {
 				Player.setVisible(false);
 				a.setVisible(false);
 				ingame = false;
+			}
+		}
+
+		Rectangle PlayerBox = Player.getBounds();
+		Rectangle BlockBox = Block.getBounds();
+		if (GM_Utilities.checkCollision(PlayerBox, BlockBox)) {
+			switch (GM_Utilities.getCollisionSide(PlayerBox, BlockBox)) {
+				case "TOP":
+					Player.setMove("UP");
+					break;
+				case "RIGHT":
+					Player.setMove("RIGHT");
+					break;
+				case "BOTTOM":
+					Player.setMove("DOWN");
+					break;
+				case "LEFT":
+					Player.setMove("LEFT");
+					break;
 			}
 		}
 
@@ -199,7 +223,7 @@ public class board extends JPanel implements Runnable {
 				Enemy a = (Enemy) Enemies.get(j);
 				Rectangle r2 = a.getBounds();
 
-				if (r1.intersects(r2)) {
+				if (GM_Utilities.checkCollision(r1, r2)) {
 					m.setVisible(false);
 					a.setHealth(-1);
 					if (a.getHealth()<=0) {

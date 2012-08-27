@@ -16,12 +16,11 @@ public class ProjectGM extends JFrame {
 		setSize(WIDTH, HEIGHT);
 		setLocationRelativeTo(null);
 		setTitle("TwinStick Shooter");
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 		Insets inset = getInsets();
 		int INSET_WIDTH = inset.left+inset.right;
 		int INSET_HEIGHT = inset.top+inset.bottom;
-		System.err.println(INSET_WIDTH);
 		setSize(WIDTH+INSET_WIDTH, HEIGHT+INSET_HEIGHT);
 	}
 	public static void main(String[] args) {

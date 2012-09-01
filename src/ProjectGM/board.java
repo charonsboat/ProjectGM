@@ -22,8 +22,8 @@ public class board extends JPanel implements Runnable {
 	private double timeOver;
 	private Thread thread;
 	public Player Player;
-	private Block Block;
 	private ArrayList Enemies;
+	private ArrayList Blocks;
 	private boolean ingame;
 	private int B_WIDTH;
 	private int B_HEIGHT;
@@ -32,6 +32,11 @@ public class board extends JPanel implements Runnable {
 
 	private int[][] pos = {
 		{250, 200}, {300, 40}, {300, 200}, {150, 10}
+		//{1000, 1000}
+	};
+	private int[][] tilePos = {
+		{0, 5}, {1, 5}, {2, 5}, {3, 5},
+		{4, 0}, {4, 1}, {4, 2}, {4, 3}, {4, 4}, {4, 5}
 	};
 
 	public board() {
@@ -44,8 +49,8 @@ public class board extends JPanel implements Runnable {
 		setSize(400, 300);
 
 		Player = new Player();
-		Block = new Block();
 
+		initBlocks();
 		initEnemies();
 	}
 	private void displayFPS() {
@@ -57,6 +62,14 @@ public class board extends JPanel implements Runnable {
 		B_HEIGHT = getHeight();
 		thread = new Thread(this);
 		thread.start();
+	}
+	public void initBlocks() {
+		Blocks = new ArrayList();
+
+		for (int i=0; i<tilePos.length; ++i) {
+			int[] points = Tile.get(tilePos[i][0], tilePos[i][1]);
+			Blocks.add(new Block(points[0], points[1]));
+		}
 	}
 	public void initEnemies() {
 		Enemies = new ArrayList();
@@ -74,12 +87,18 @@ public class board extends JPanel implements Runnable {
 			if (Player.isVisible()) {
 				g2d.drawImage(Player.getImage(), Player.getX(), Player.getY(), this);
 			}
-			if (Block.isVisible()) {
-				g2d.drawImage(Block.getImage(), Block.getX(), Block.getY(), this);
-			}
 
 			ArrayList ms = Player.getMissiles();
 
+			for (int i=0; i<Blocks.size(); ++i) {
+				Block b = (Block) Blocks.get(i);
+				if (b.isVisible()) {
+					g2d.drawImage(b.getImage(), b.getX(), b.getY(), this);
+					if (Player.stats()) {
+						// Add in block stats;
+					}
+				}
+			}
 			for (int i=0;i<ms.size();++i) {
 				missile m = (missile) ms.get(i);
 				g2d.drawImage(m.getImage(), m.getX(), m.getY(), this);
@@ -194,23 +213,35 @@ public class board extends JPanel implements Runnable {
 		}
 
 		Rectangle PlayerBox = Player.getBounds();
-		Rectangle BlockBox = Block.getBounds();
-		if (GM_Utilities.checkCollision(PlayerBox, BlockBox)) {
-			switch (GM_Utilities.getCollisionSide(PlayerBox, BlockBox)) {
-				case "TOP":
-					Player.setMove("UP");
+		for (int i=0; i<Blocks.size(); ++i) {
+			Block b = (Block) Blocks.get(i);
+			Rectangle BlockBox = b.getBounds();
+			boolean colliding = false;
+
+			if (GM_Utilities.checkCollision(PlayerBox, BlockBox)) {
+				switch (GM_Utilities.getCollisionSide(PlayerBox, BlockBox)) {
+					case "TOP":
+						Player.setMove("UP");
+						colliding = true;
+						break;
+					case "RIGHT":
+						Player.setMove("RIGHT");
+						colliding = true;
+						break;
+					case "BOTTOM":
+						Player.setMove("DOWN");
+						colliding = true;
+						break;
+					case "LEFT":
+						Player.setMove("LEFT");
+						colliding = true;
+						break;
+				}
+				if (colliding) {
 					break;
-				case "RIGHT":
-					Player.setMove("RIGHT");
-					break;
-				case "BOTTOM":
-					Player.setMove("DOWN");
-					break;
-				case "LEFT":
-					Player.setMove("LEFT");
-					break;
+				}
 			}
-		}
+		}	
 
 		ArrayList ms = Player.getMissiles();
 

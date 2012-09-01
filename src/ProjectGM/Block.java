@@ -17,14 +17,14 @@ public class Block {
 	private boolean visible;
 	private Image image;
 
-	public Block() {
+	public Block(int x, int y) {
 		ImageIcon ii = new ImageIcon(this.getClass().getResource(Block));
 		image = ii.getImage();
 		width = image.getWidth(null);
 		height = image.getHeight(null);
 		visible = true;
-		x = 50;
-		y = 100;
+		this.x = x;
+		this.y = y;
 	}
 	public int getX() {
 		return x;

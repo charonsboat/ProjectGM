@@ -144,7 +144,7 @@ public class Player {
 		}
 	}
 	public void fire(String direction) {
-		missiles.add(new missile(x+width, y+height/2, direction));
+		missiles.add(new missile((x+width/2)-2, (y+height/2)-2, direction)); // Try to make a public static int in missile class to grab width and height in case of image dimension change.
 	}
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();

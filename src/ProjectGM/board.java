@@ -31,12 +31,16 @@ public class board extends JPanel implements Runnable {
 	private final int DELAY = 10;
 
 	private int[][] pos = {
-		{250, 200}, {300, 40}, {300, 200}, {150, 10}
-		//{1000, 1000}
+		//{250, 200}, {300, 40}, {300, 200}, {150, 10}
+		{1000, 1000}
 	};
 	private int[][] tilePos = {
-		{0, 5}, {1, 5}, {2, 5}, {3, 5},
-		{4, 0}, {4, 1}, {4, 2}, {4, 3}, {4, 4}, {4, 5}
+		{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7},
+		{1, 0}, {1, 7},
+		{2, 0}, {2, 5}, {2, 7},
+		{3, 0}, {3, 7},
+		{4, 0}, {4, 7},
+		{5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 5}, {5, 6}, {5, 7}
 	};
 
 	public board() {
@@ -119,6 +123,8 @@ public class board extends JPanel implements Runnable {
 			if (Player.stats()) {
 				g2d.setColor(Color.WHITE);
 				g2d.drawString("Enemies Left: "+Enemies.size(), 5, 15);
+				g2d.drawString("X: "+Player.getX(), 100, 15);
+				g2d.drawString("Y: "+Player.getY(), 150, 15);
 				displayFPS();
 				g2d.drawString("FPS: "+String.valueOf(FPS), 200, 15);
 			}
@@ -217,28 +223,35 @@ public class board extends JPanel implements Runnable {
 			Block b = (Block) Blocks.get(i);
 			Rectangle BlockBox = b.getBounds();
 			boolean colliding = false;
+			boolean collidingTop = false;
+			boolean collidingRight = false;
+			boolean collidingBottom = false;
+			boolean collidingLeft = false;
 
 			if (GM_Utilities.checkCollision(PlayerBox, BlockBox)) {
 				switch (GM_Utilities.getCollisionSide(PlayerBox, BlockBox)) {
 					case "TOP":
-						Player.setMove("UP");
+						Player.setPosition((Player.getX()), (int)(BlockBox.getY()-PlayerBox.getHeight()));
 						colliding = true;
 						break;
 					case "RIGHT":
-						Player.setMove("RIGHT");
+						Player.setPosition((int)(BlockBox.getX()+BlockBox.getWidth()), (Player.getY()));
 						colliding = true;
 						break;
 					case "BOTTOM":
-						Player.setMove("DOWN");
+						Player.setPosition((Player.getX()), (int)(BlockBox.getY()+BlockBox.getHeight()));
 						colliding = true;
 						break;
 					case "LEFT":
-						Player.setMove("LEFT");
+						Player.setPosition((int)(BlockBox.getX()-PlayerBox.getWidth()), (Player.getY()));
 						colliding = true;
 						break;
 				}
-				if (colliding) {
-					break;
+				//if (colliding) {
+				//	break;
+				//}
+				if (GM_Utilities.checkCollision(PlayerBox,  BlockBox)) {
+					Player.setMove("NONE");
 				}
 			}
 		}	

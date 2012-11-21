@@ -34,6 +34,11 @@ public class GM_Utilities {
 		if ((Entity1.getY()+(1+Player.speed()))>(Entity2.getY()+Entity2.getHeight())) {
 			side = "BOTTOM";
 		}
+		if ((((Entity1.getX()+Entity1.getWidth())-(1+Player.speed()))>Entity2.getX())&&((Entity1.getX()+(1+Player.speed()))<(Entity2.getX()+Entity2.getWidth()))) {
+			if ((((Entity1.getY()+Entity1.getHeight())-(1+Player.speed()))>Entity2.getY())&&((Entity1.getY()+(1+Player.speed()))<(Entity2.getY()+Entity2.getHeight()))) {
+				side = "INSIDE";
+			}
+		}
 		System.err.println(side);
 
 		return side;

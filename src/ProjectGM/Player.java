@@ -31,8 +31,8 @@ public class Player {
 		height = image.getHeight(null);
 		missiles = new ArrayList();
 		visible = true;
-		x = 40;
-		y = 60;
+		x = 100;
+		y = 100;
 	}
 	public static int speed() {
 		int speed = PLAYER_SPEED;
@@ -77,7 +77,16 @@ public class Player {
 				break;
 			case "LEFT":
 				x -= PLAYER_SPEED;
+				break;
+			case "NONE":
+				x = x;
+				y = y;
+				break;
 		}
+	}
+	public void setPosition(int set_x, int set_y) {
+		x = set_x;
+		y = set_y;
 	}
 	public int getX() {
 		return x;

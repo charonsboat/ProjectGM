@@ -5,3 +5,10 @@ ProjectGM ToDo List:
 -Grid Layout with Tile Objects
 -Toggleable gridlines, and Entity Box Lines with Debug Stats
 -Level Editor (Long Term)
+
+
+-Change Collision detection so instead of moving the player away from the colliding block, it sets the players x coordinate away from the block, ex:
+
+	if (block.side()=="top") {
+		Player.y = (block.y - Player.getHeight());
+	}

@@ -9,6 +9,7 @@ Still Needs Done:
 	-Grid Layout with Tile Objects
 	-Toggleable gridlines, and Entity Box Lines with Debug Stats
 	-Level Editor (Long Term)
+	-Collision Detection bug with sliding against walls. Finding a way of ignoring box corners when checking for detection would work well...corner radius of 3-5px perhaps? It needs to at least be more than the pixel leap made by moving objects...
 
 
 	
